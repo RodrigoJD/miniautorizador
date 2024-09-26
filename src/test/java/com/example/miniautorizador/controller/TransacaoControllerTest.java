@@ -1,6 +1,6 @@
 package com.example.miniautorizador.controller;
 
-import com.example.miniautorizador.service.CartaoService;
+import com.example.miniautorizador.service.TransacaoService;
 import com.example.miniautorizador.util.TestUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -10,17 +10,15 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
-@WebMvcTest(CartaoController.class)
-public class CartaoControllerTest {
+@WebMvcTest(TransacaoController.class)
+public class TransacaoControllerTest {
 
     @MockBean
-    private CartaoService cartaoService;
+    private TransacaoService transacaoService;
 
     @Autowired
     private MockMvc mockMvc;
@@ -30,18 +28,12 @@ public class CartaoControllerTest {
 
     @Test
     void shouldCreateCartao() throws Exception {
-        var cartao = TestUtil.buildCartao();
+        // TransacaoRequest para cartão numero 6549873025634501, senha 1234 e valor 10.00
+        var request = TestUtil.buildTransacaoRequest();
 
-        mockMvc.perform(post("/cartoes").contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(cartao)))
+        mockMvc.perform(post("/transacoes").contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isCreated())
-                .andDo(print());
-    }
-
-    @Test
-    void shouldGetSaldo() throws Exception {
-        mockMvc.perform(get("/cartoes/{numeroCartao}", "6549873025634501"))
-                .andExpect(status().isOk())
                 .andDo(print());
     }
 }

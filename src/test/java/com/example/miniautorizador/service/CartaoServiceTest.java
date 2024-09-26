@@ -5,7 +5,6 @@ import com.example.miniautorizador.exception.CartaoJaCadastradoException;
 import com.example.miniautorizador.exception.CartaoNaoCadastradoException;
 import com.example.miniautorizador.repository.CartaoRepository;
 import com.example.miniautorizador.service.imp.CartaoServiceImp;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

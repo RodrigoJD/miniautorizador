@@ -6,5 +6,5 @@ import org.springframework.http.HttpStatus;
 @Getter
 public class CartaoNaoCadastradoException extends RuntimeException{
 
-    private HttpStatus httpStatus = HttpStatus.NOT_FOUND;
+    private final HttpStatus httpStatus = HttpStatus.NOT_FOUND;
 }

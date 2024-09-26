@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CartaoServiceImp implements CartaoService {
 
-    private static Logger logger = LoggerFactory.getLogger(CartaoServiceImp.class);
+    private static final Logger logger = LoggerFactory.getLogger(CartaoServiceImp.class);
 
     @Autowired
     private CartaoRepository repository;

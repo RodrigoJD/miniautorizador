@@ -6,5 +6,5 @@ import org.springframework.http.HttpStatus;
 @Getter
 public class CartaoJaCadastradoException extends RuntimeException {
 
-    private HttpStatus httpStatus = HttpStatus.UNPROCESSABLE_ENTITY;
+    private final HttpStatus httpStatus = HttpStatus.UNPROCESSABLE_ENTITY;
 }

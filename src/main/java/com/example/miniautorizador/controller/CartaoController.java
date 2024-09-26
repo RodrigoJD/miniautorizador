@@ -20,22 +20,22 @@ public class CartaoController {
     private CartaoService cartaoService;
 
     @PostMapping
-    public ResponseEntity<CartaoResponse> createCartao(@RequestBody Cartao cartao) {
+    public ResponseEntity<CartaoResponse> createCartao (@RequestBody Cartao cartao) {
         try {
             cartaoService.createCartao(cartao);
             return new ResponseEntity<>(new CartaoResponse(cartao.getNumeroCartao(), cartao.getSenha()),new HttpHeaders(), HttpStatus.CREATED);
         } catch (CartaoJaCadastradoException e) {
-            return new ResponseEntity<>(new CartaoResponse(cartao.getNumeroCartao(), cartao.getSenha()),new HttpHeaders(), e.getHttpStatus());
+            return new ResponseEntity<>(new CartaoResponse(cartao.getNumeroCartao(), cartao.getSenha()),new HttpHeaders(), HttpStatus.UNPROCESSABLE_ENTITY);
         }
     }
     
     @GetMapping("/{numeroCartao}")
-    public ResponseEntity<Double> getSaldo(@PathVariable Long numeroCartao){
+    public ResponseEntity<Double> getSaldo (@PathVariable Long numeroCartao){
         try {
             var saldo = cartaoService.getSaldo(numeroCartao);
             return new ResponseEntity<>(saldo, new HttpHeaders(), HttpStatus.OK);
         } catch (CartaoNaoCadastradoException e) {
-            return new ResponseEntity<>(new HttpHeaders(), e.getHttpStatus());
+            return new ResponseEntity<>(new HttpHeaders(), HttpStatus.NOT_FOUND);
         }
     }
 }

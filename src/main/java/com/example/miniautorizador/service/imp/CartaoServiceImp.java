@@ -21,7 +21,7 @@ public class CartaoServiceImp implements CartaoService {
 
     @Override
     @Transactional
-    public void createCartao(Cartao cartao) {
+    public void criarCartao(Cartao cartao) {
         repository.findById(cartao.getNumeroCartao()).ifPresent(s -> {
             logger.info("Cartão ja cadastrado na base de dados.");
             throw new CartaoJaCadastradoException();
@@ -31,7 +31,7 @@ public class CartaoServiceImp implements CartaoService {
     }
 
     @Override
-    public Double getSaldo(Long numeroCartao) {
+    public Double retornarSaldo(Long numeroCartao) {
         var cartao = repository.findById(numeroCartao).orElseThrow(CartaoNaoCadastradoException::new);
         return cartao.getValor();
     }

@@ -1,6 +1,6 @@
 package com.example.miniautorizador.service.imp;
 
-import com.example.miniautorizador.entity.Cartao;
+import com.example.miniautorizador.controller.request.TransacaoRequest;
 import com.example.miniautorizador.exception.CartaoNaoCadastradoException;
 import com.example.miniautorizador.exception.SaldoInsuficienteException;
 import com.example.miniautorizador.exception.SenhaInvalidaException;
@@ -16,15 +16,15 @@ public class TransacaoServiceImp implements TransacaoService {
     private CartaoRepository cartaoRepository;
 
     @Override
-    public void realizarTransacao(Cartao cartao) {
-        var cartaoToBeUpdated = cartaoRepository.findById(cartao.getNumeroCartao()).orElseThrow(CartaoNaoCadastradoException::new);
-        if (!cartao.getSenha().equals(cartaoToBeUpdated.getSenha())) {
+    public void realizarTransacao(TransacaoRequest request) {
+        var cartaoToBeUpdated = cartaoRepository.findById(request.getNumeroCartao()).orElseThrow(CartaoNaoCadastradoException::new);
+        if (!request.getSenha().equals(cartaoToBeUpdated.getSenha())) {
             throw new SenhaInvalidaException();
         }
-        if(cartao.getValor() > cartaoToBeUpdated.getValor()){
+        if(request.getValor() > cartaoToBeUpdated.getValor()){
             throw new SaldoInsuficienteException();
         }
-        cartaoToBeUpdated.setValor(cartaoToBeUpdated.getValor() - cartao.getValor());
+        cartaoToBeUpdated.setValor(cartaoToBeUpdated.getValor() - request.getValor());
         cartaoRepository.save(cartaoToBeUpdated);
     }
 }

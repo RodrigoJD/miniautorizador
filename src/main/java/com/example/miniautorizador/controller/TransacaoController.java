@@ -1,10 +1,11 @@
 package com.example.miniautorizador.controller;
 
-import com.example.miniautorizador.entity.Cartao;
+import com.example.miniautorizador.controller.request.TransacaoRequest;
 import com.example.miniautorizador.exception.CartaoNaoCadastradoException;
 import com.example.miniautorizador.exception.SaldoInsuficienteException;
 import com.example.miniautorizador.exception.SenhaInvalidaException;
 import com.example.miniautorizador.service.TransacaoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -23,9 +24,9 @@ public class TransacaoController {
     private TransacaoService transacaoService;
 
     @PostMapping
-    public ResponseEntity<String> transacao (@RequestBody Cartao cartao) {
+    public ResponseEntity<String> realizarTransacao (@Valid @RequestBody TransacaoRequest request) {
         try{
-            transacaoService.realizarTransacao(cartao);
+            transacaoService.realizarTransacao(request);
             return new ResponseEntity<>(OK, new HttpHeaders(), HttpStatus.CREATED);
         } catch (CartaoNaoCadastradoException | SaldoInsuficienteException | SenhaInvalidaException e) {
             return new ResponseEntity<>(e.getMessage(), new HttpHeaders(), HttpStatus.UNPROCESSABLE_ENTITY);

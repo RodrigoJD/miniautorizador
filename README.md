@@ -13,7 +13,7 @@ e em seguida "docker compose up".
 o código dos POJO's mais limpos e o Spring Validator para validar os requests.
 - Utilizei interfaces em cada serviço para reduzir o acoplamento entre o serviço e o controller.
 - No repositorio optei por usar o Spring Data para uma vez que as consultas eram simples sem misturar SQL com JAVA.
-- Implementei testes unitarios para o controller e o serviço, tentei uma implementação para mockar o serviço e simular
+- Implementei testes unitarios para o controller e o serviço, tentei uma implementação para mocar o serviço e simular
 erros no teste do controller, tenho um código assim funcionando em Junit 4 mas replicando e ajustando o código em Junit 
 5 o mesmo permitiu essa simulação, então implementei testes do controller usando o mockito para verificar os bodies
 retornados pelo controller.

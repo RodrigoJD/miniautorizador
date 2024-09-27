@@ -17,6 +17,8 @@ o código dos POJO's mais limpos e o Spring Validator para validar os requests.
 erros no teste do controller, tenho um código assim funcionando em Junit 4 mas replicando e ajustando o código em Junit 
 5 o mesmo permitiu essa simulação, então implementei testes do controller usando o mockito para verificar os bodies
 retornados pelo controller.
+- Utilizei padrão em ingles no código com exceção da classe cartão e propriedades desta entity e do response e request que
+são exibidos aos usuários para não quebrar a assinatura dos bodies e repostas esperadas pelo sistema.
 
   
 ## Enunciado do exercicio para referência.

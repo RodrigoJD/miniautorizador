@@ -32,20 +32,20 @@ services:
       interval: 3s
       timeout: 30s
 
-  miniautorizador:
-    build:
-      context: ../
-      dockerfile: Dockerfile
-    ports:
-      - "8080:8080"
-    depends_on:
-      mysql:
-        condition: service_healthy
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/miniautorizador
-      - SPRING_DATASOURCE_USERNAME=root
-    deploy:
-      restart_policy:
-        condition: on-failure
-        delay: 10s
-        max_attempts: 3
+#  miniautorizador:
+#    build:
+#      context: ../
+#      dockerfile: Dockerfile
+#    ports:
+#      - "8080:8080"
+#    depends_on:
+#      mysql:
+#        condition: service_healthy
+#    environment:
+#      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/miniautorizador
+#      - SPRING_DATASOURCE_USERNAME=root
+#    deploy:
+#      restart_policy:
+#        condition: on-failure
+#        delay: 10s
+#        max_attempts: 3

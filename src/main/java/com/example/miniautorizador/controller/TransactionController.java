@@ -1,10 +1,10 @@
 package com.example.miniautorizador.controller;
 
-import com.example.miniautorizador.controller.request.TransacaoRequest;
-import com.example.miniautorizador.exception.CartaoNaoCadastradoException;
-import com.example.miniautorizador.exception.SaldoInsuficienteException;
-import com.example.miniautorizador.exception.SenhaInvalidaException;
-import com.example.miniautorizador.service.TransacaoService;
+import com.example.miniautorizador.controller.request.TransactionRequest;
+import com.example.miniautorizador.exception.CardNotFoundException;
+import com.example.miniautorizador.exception.InsufficientBalanceException;
+import com.example.miniautorizador.exception.InvalidPasswordException;
+import com.example.miniautorizador.service.TransactionService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -17,18 +17,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping(value = "/transacoes")
-public class TransacaoController {
+public class TransactionController {
 
     public static final String OK = "OK";
+
     @Autowired
-    private TransacaoService transacaoService;
+    private TransactionService transactionService;
 
     @PostMapping
-    public ResponseEntity<String> realizarTransacao (@Valid @RequestBody TransacaoRequest request) {
+    public ResponseEntity<String> makeTransaction (@Valid @RequestBody TransactionRequest request) {
         try{
-            transacaoService.realizarTransacao(request);
+            transactionService.makeTransaction(request);
             return new ResponseEntity<>(OK, new HttpHeaders(), HttpStatus.CREATED);
-        } catch (CartaoNaoCadastradoException | SaldoInsuficienteException | SenhaInvalidaException e) {
+        } catch (CardNotFoundException | InsufficientBalanceException | InvalidPasswordException e) {
             return new ResponseEntity<>(e.getMessage(), new HttpHeaders(), HttpStatus.UNPROCESSABLE_ENTITY);
         }
     }

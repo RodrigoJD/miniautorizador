@@ -1,4 +1,25 @@
-#Teste de programação - VR Benefícios
+# Teste de programação - VR Benefícios por Rodrigo Jeferson Damasceno
+
+## Instruções para execução do sistema:
+
+- navegar até a pasta raiz do projeto e exeuctar o comand0 maven "mvn clean install".
+- uma vez executado o comando maven navegar até a pasta docker dentro do projeto e rodar o comando "docker compose build" 
+e em seguida "docker compose up".
+
+
+## Descrição da solução
+
+- Sistema foi implementado usando Java 17, Spring 3.3.4 e MySql. alem dessas depencencias, adicionei o Lombok pára manter
+o código dos POJO's mais limpos e o Spring Validator para validar os requests.
+- Utilizei interfaces em cada serviço para reduzir o acoplamento entre o serviço e o controller.
+- No repositorio optei por usar o Spring Data para uma vez que as consultas eram simples sem misturar SQL com JAVA.
+- Implementei testes unitarios para o controller e o serviço, tentei uma implementação para mockar o serviço e simular
+erros no teste do controller, tenho um código assim funcionando em Junit 4 mas replicando e ajustando o código em Junit 
+5 o mesmo permitiu essa simulação, então implementei testes do controller usando o mockito para verificar os bodies
+retornados pelo controller.
+
+  
+## Enunciado do exercicio para referência.
 
 Como parte do processo de seleção, gostaríamos que você desenvolvesse um pequeno sistema, para que possamos ver melhor o seu trabalho.
 

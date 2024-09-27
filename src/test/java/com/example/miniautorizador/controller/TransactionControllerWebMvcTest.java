@@ -1,6 +1,6 @@
 package com.example.miniautorizador.controller;
 
-import com.example.miniautorizador.service.TransacaoService;
+import com.example.miniautorizador.service.TransactionService;
 import com.example.miniautorizador.util.TestUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -14,11 +14,11 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(TransacaoController.class)
-public class TransacaoControllerTest {
+@WebMvcTest(TransactionController.class)
+public class TransactionControllerWebMvcTest {
 
     @MockBean
-    private TransacaoService transacaoService;
+    private TransactionService transactionService;
 
     @Autowired
     private MockMvc mockMvc;
@@ -27,9 +27,9 @@ public class TransacaoControllerTest {
     private ObjectMapper objectMapper;
 
     @Test
-    void shouldCreateCartao() throws Exception {
-        // TransacaoRequest para cartão numero 6549873025634501, senha 1234 e valor 10.00
-        var request = TestUtil.buildTransacaoRequest();
+    void shouldDoTransaction() throws Exception {
+        // TransactionRequest for card number 6549873025634501, psw 1234 e value 10.00
+        var request = TestUtil.buildTransactionRequest();
 
         mockMvc.perform(post("/transacoes").contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))

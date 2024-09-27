@@ -1,6 +1,6 @@
 package com.example.miniautorizador.controller;
 
-import com.example.miniautorizador.service.CartaoService;
+import com.example.miniautorizador.service.CardService;
 import com.example.miniautorizador.util.TestUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -16,11 +16,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
-@WebMvcTest(CartaoController.class)
-public class CartaoControllerTest {
+@WebMvcTest(CardController.class)
+public class CardControllerWebMvcTest {
 
     @MockBean
-    private CartaoService cartaoService;
+    private CardService cardService;
 
     @Autowired
     private MockMvc mockMvc;
@@ -30,10 +30,10 @@ public class CartaoControllerTest {
 
     @Test
     void shouldCreateCartao() throws Exception {
-        var cartao = TestUtil.buildCartao();
+        var card = TestUtil.buildCard();
 
         mockMvc.perform(post("/cartoes").contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(cartao)))
+                        .content(objectMapper.writeValueAsString(card)))
                 .andExpect(status().isCreated())
                 .andDo(print());
     }
